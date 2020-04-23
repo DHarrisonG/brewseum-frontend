@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, TextArea } from 'semantic-ui-react'
+import { Button, Form, Grid, TextArea} from 'semantic-ui-react'
 
 class Signup extends React.Component {
     state = {
@@ -15,7 +15,19 @@ class Signup extends React.Component {
     }
 
     handleSubmit = () => {
-        console.log("WE SUBMITIN TODAY BOIS!")
+        fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({
+                username: this.state.Username,
+                password: this.state.password,
+                image: this.state.image,
+                about: this.state.about 
+            })
+        } )
     }
 
     handlePostUser = () => {
@@ -29,8 +41,9 @@ class Signup extends React.Component {
                     <Grid.Row centered>
                         <Grid.Column width={6}>
                             <Form onSubmit={this.handleSubmit}>
-                                <Form.Field>
+                                <Form.Field >
                                     <Form.Input
+                                        required
                                         label="Username"
                                         name="Username"
                                         placeholder="Username"
@@ -39,6 +52,7 @@ class Signup extends React.Component {
                                 </Form.Field>
                                 <Form.Field>
                                     <Form.Input
+                                        required
                                         label="Password"
                                         name="Password"
                                         placeholder="Password"
@@ -55,6 +69,7 @@ class Signup extends React.Component {
                                 </Form.Field>
                                 <Form.Field>
                                     <Form.TextArea
+                                        required
                                         label="About"
                                         name="About"
                                         placeholder='Tell us more about you!'
