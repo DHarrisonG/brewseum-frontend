@@ -2,19 +2,24 @@ import React from 'react'
 import { Button, Form, Grid, TextArea} from 'semantic-ui-react'
 
 class Signup extends React.Component {
-    state = {
-        Username: "",
-        Password: "",
-        Image: "",
-        About: ""
-    }
-    handleChange = (e) => {
-        this.setState = {
-            name: e.target.value
+    constructor(){
+        super()
+        this.state = {
+            username: "wtf",
+            password: "",
+            image: "",
+            about: ""
         }
     }
 
-    handleSubmit = () => {
+    handleChange = (e) => {
+        this.setState ({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
+        console.log(this.state.password)
         fetch("http://localhost:3000/users", {
             method: "POST",
             headers: {
@@ -22,10 +27,12 @@ class Signup extends React.Component {
                 'Content-Type': 'application/json' 
             },
             body: JSON.stringify({
-                username: this.state.Username,
-                password: this.state.password,
-                image: this.state.image,
-                about: this.state.about 
+                users: {
+                    username: this.state.username,
+                    password: this.state.password,
+                    image: this.state.image,
+                    about: this.state.about 
+                }
             })
         } )
     }
@@ -37,6 +44,7 @@ class Signup extends React.Component {
     render() {
         return (
             <>
+            <h1>{this.state.username}</h1>
                 <Grid>
                     <Grid.Row centered>
                         <Grid.Column width={6}>
@@ -45,7 +53,7 @@ class Signup extends React.Component {
                                     <Form.Input
                                         required
                                         label="Username"
-                                        name="Username"
+                                        name="username"
                                         placeholder="Username"
                                         onChange={this.handleChange}
                                     />
@@ -54,7 +62,7 @@ class Signup extends React.Component {
                                     <Form.Input
                                         required
                                         label="Password"
-                                        name="Password"
+                                        name="password"
                                         placeholder="Password"
                                         onChange={this.handleChange}
                                     />
@@ -62,7 +70,7 @@ class Signup extends React.Component {
                                 <Form.Field>
                                     <Form.Input
                                         label="Image"
-                                        name="Image"
+                                        name="image"
                                         placeholder="http://www.website.com/profilephoto"
                                         onChange={this.handleChange}
                                     />
@@ -71,7 +79,7 @@ class Signup extends React.Component {
                                     <Form.TextArea
                                         required
                                         label="About"
-                                        name="About"
+                                        name="about"
                                         placeholder='Tell us more about you!'
                                         onChange={this.handleChange}
                                     />
