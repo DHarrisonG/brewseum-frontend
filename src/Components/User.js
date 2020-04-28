@@ -8,20 +8,23 @@ class User extends React.Component {
         this.state = {
             username: '',
             image: '',
-            about: ''
+            about: '',
+            // joined: ''
         }
     }
 
 
     componentDidMount() {
-        fetch('http://localhost:3000/users/1')
+        const urlInput = parseInt(window.location.href.split("/").slice(-1)[0])
+        fetch(`http://localhost:3000/users/${urlInput}`)
             .then(r => r.json())
             .then(user => {
                 console.log(user)
                 this.setState({
                     username: user.username,
                     image: user.image,
-                    about: user.about
+                    about: user.about,
+                    // joined: user.created_at
 
                 })
             })
@@ -42,7 +45,7 @@ class User extends React.Component {
                             <Card.Content>
                                 <Card.Header>{this.state.username}</Card.Header>
                                 <Card.Meta>
-                                    <span className='date'>Joined in 2015</span>
+                                    <span className='date'>Joined: {this.state.joined}</span>
                                 </Card.Meta>
                             </Card.Content>
                         </Card>

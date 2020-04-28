@@ -1,34 +1,55 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './Components/Nav'
 import Home from './Components/Home'
-import Signup from './Components/Signup'
+import Signup from './Components/auth/Signup'
 import User from './Components/User'
 import Bar from './Components/Bar'
 
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super()
+
     this.state = {
-      loggedIn: false
+      loggedInStatus: "NOT_LOGGED_IN",
+      user: {}
     }
+
+    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this)
+
   }
 
-  render(){
+  handleSuccessfulAuth(data){
+    this.props.history.push("/")
+}
+
+  render() {
     return (
       <div className="App">
-        <Nav loggedin={this.state.loggedIn}/>
+        <Nav loggedInStatus={this.state.loggedInStatus} />
         <Router>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path= "/user/:id" component={User} />
-          <Route exact path="/bar" component={Bar} />
+          <Switch>
+            <Route
+              exact
+              path={"/"}
+              render={props => (
+                <Home {...props} loggedInStatus={this.state.loggedInStatus} />
+              )} />
+            <Route
+              exact
+              path="/signup"
+              render={props => (
+                <Signup handleSuccessfulAuth={this.handleSuccessfulAuth} />
+              )} />
+            <Route exact path="/user/:id" component={User} />
+            <Route exact path="/bar" component={Bar} />
+          </Switch>
         </Router>
       </div>
-    );  
+    );
   }
 }
 

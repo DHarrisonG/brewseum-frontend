@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Grid, TextArea} from 'semantic-ui-react'
 
-class Signup extends React.Component {
+class oldSignup extends React.Component {
     constructor(){
         super()
         this.state = {
@@ -35,10 +35,6 @@ class Signup extends React.Component {
                 }
             })
         } )
-    }
-
-    handlePostUser = () => {
-
     }
 
     render() {
@@ -94,4 +90,4 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup; 
+export default oldSignup; 

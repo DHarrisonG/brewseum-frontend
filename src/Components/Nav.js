@@ -2,13 +2,14 @@ import React from 'react'
 import { Input, Button, Menu } from 'semantic-ui-react'
 
 class Nav extends React.Component {
-    // constructor() {
-    //     super()
-    //     this.state = {
-    //         activeItem: 'home'
-    //     }
-    // }
-    state = { activeItem: '' }
+    constructor(props) {
+        super(props)
+        this.state = {
+            activeItem: '',
+            loggedInStatus: this.props.loggedInStatus
+        }
+    }
+    // state = { activeItem: '' }
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
