@@ -51,7 +51,7 @@ export default function Home(props) {
                         }}
                     >
                         <div>
-                            <h2>{selectedBar.name}</h2>
+                            <a href={`http://localhost:3001/bar/${selectedBar.id}`}><h2>{selectedBar.name}</h2></a>
                             <p>Est: {selectedBar.opened}</p>
                             <img className="pop-img" src={selectedBar.image} />
                         </div>
