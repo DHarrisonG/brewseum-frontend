@@ -23,9 +23,13 @@ code {
   height: 30px;
 }
 
-.popup {
-  max-width: 500px;
+.mapboxgl-popup-content{
+  width: 370px;
 }
+
+/* .popup {
+  max-width: 300px;
+} */
 
 .pop-img {
   max-width: 350px;
