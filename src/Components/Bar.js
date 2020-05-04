@@ -1,6 +1,8 @@
 import React from 'react'
 import Comments from './Comments'
+import BarImage from './BarImage'
 import { Button, Form } from 'semantic-ui-react'
+
 
 class Bar extends React.Component {
     constructor() {
@@ -68,7 +70,8 @@ class Bar extends React.Component {
     render() {
         return (
             <>
-                <div class="ui segment barImage">
+                <div>
+                    <BarImage image={this.state.image}/>
                 </div>
                 <div class="ui segment p">
                     <p>{this.state.overview}</p>

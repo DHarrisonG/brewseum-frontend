@@ -40,13 +40,18 @@ code {
   margin-bottom: 0;
 }
 
-.ui.segment.barImage {
-  background: url("https://thumbor.thedailymeal.com/IZzrgZnx1_7MBEZEhNoXM8hWRyc=/870x565/filters:focal(600x389:601x390):format(webp)/https://www.thedailymeal.com/sites/default/files/slideshows/copy/Alaska_B_and_B_Bar.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  height: 75vh;
-  margin-top: 0px;
+.ui.segment.barImage{
+  width: 100%;
+  overflow: hidden;
+  margin:0; 
+  height: 500px
+
+}
+
+.barImage {
+  object-fit: cover;
+  text-align: center;
+  margin: -0px 0px 0px -0px;
 }
 
 .ui.segment.p {
