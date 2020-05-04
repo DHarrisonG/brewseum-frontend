@@ -14,7 +14,7 @@ class App extends Component {
     super()
 
     this.state = {
-      loggedInStatus: "NOT_LOGGED_IN",
+      loggedIn: false,
       user: {},
       bars: []
     }
@@ -31,7 +31,6 @@ class App extends Component {
     fetch('http://localhost:3000/bars')
     .then(r => r.json())
     .then(bars => {
-      console.log(bars)
       this.setState({
         bars: bars
       })
@@ -41,14 +40,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav loggedInStatus={this.state.loggedInStatus} />
+        <Nav loggedIn={this.state.loggedIn} bars={this.state.bars}/>
         <Router>
           <Switch>
             <Route
               exact
               path={"/"}
               render={props => (
-                <Home {...props} bars={this.state.bars} loggedInStatus={this.state.loggedInStatus} />
+                <Home {...props} bars={this.state.bars} loggedIn={this.state.loggedIn} />
               )} />
             <Route
               exact
@@ -57,7 +56,7 @@ class App extends Component {
                 <Signup handleSuccessfulAuth={this.handleSuccessfulAuth} />
               )} />
             <Route exact path="/user/:id" component={User} />
-            <Route exact path="/bar/:id" component={Bar} />
+            <Route exact path="/bars/:id" component={Bar} />
           </Switch>
         </Router>
       </div>

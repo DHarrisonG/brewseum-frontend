@@ -6,7 +6,6 @@ class Nav extends React.Component {
         super(props)
         this.state = {
             activeItem: '',
-            loggedInStatus: this.props.loggedInStatus
         }
     }
     // state = { activeItem: '' }
@@ -24,7 +23,7 @@ class Nav extends React.Component {
                     onClick={this.handleItemClick}
                     href='http://localhost:3001/'
                 />
-                <Menu.Item 
+                <Menu.Item
                     name='profile'
                     active={activeItem === 'profile'}
                     onClick={this.handleItemClick}
@@ -34,9 +33,11 @@ class Nav extends React.Component {
                     <Menu.Item>
                         <Input icon='search' placeholder='Search...' />
                     </Menu.Item>
-                    <Menu.Item>
-                        <Button primary href='http://localhost:3001/signup'>Sign up</Button>
-                    </Menu.Item>
+                    {this.props.loggedIn ? null : 
+                        <Menu.Item>
+                            <Button primary href='http://localhost:3001/signup'>Sign up</Button>
+                        </Menu.Item>
+                    }
                     <Menu.Item>
                         <Button>Log-in</Button>
                     </Menu.Item>
