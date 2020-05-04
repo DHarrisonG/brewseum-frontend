@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button, Form, Grid, TextArea } from 'semantic-ui-react'
-import axios from 'axios';
+import { Button, Form, Grid, TextArea, Message } from 'semantic-ui-react'
+
 
 
 class Signup extends React.Component {
@@ -21,30 +21,6 @@ class Signup extends React.Component {
             [e.target.name]: e.target.value
         })
     }
-
-
-
-    // handleSubmit = (e) => {
-    //     fetch("http://localhost:3000/users", {
-    //         method: "POST",
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json' 
-    //         },
-    //         body: JSON.stringify({
-    //             users: {
-    //                 username: this.state.username,
-    //                 password: this.state.password,
-    //                 password_confirmation: this.state.password_confirmation,
-    //                 image: this.state.image,
-    //                 about: this.state.about 
-    //             }
-    //         })
-    //     }).then(response => response.json())
-    //     .then(data => {
-    //         console.log(data)
-    //     })
-    // }
 
     handleSubmit = (event) => {
         event.preventDefault()
@@ -69,28 +45,14 @@ class Signup extends React.Component {
             .then(response => {
                 console.log(response)
             })
+        this.setState({
+            username: "",
+            password: "",
+            password_confirmation: "",
+            image: "",
+            about: ""
+        })
     }
-
-    //     handleSubmit = (e) => {
-    //         axios.post("http://localhost:3000/users", {
-
-
-    //             user: {
-    //             username: this.state.username,
-    //             password: this.state.password,
-    //             password_confirmation: this.state.password_confirmation,
-    //             image: this.state.image,
-    //             about: this.state.about
-    //         }})
-    //         .then(response => {
-    //             if(response.data.status === 'created') {
-    //     this.props.handleSuccessfulAuth(response.data)
-    // }
-    //         })
-    //         .catch (error => {
-    //     console.log("registration error", error)
-    // })
-    //     }
 
     render() {
         return (
