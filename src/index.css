@@ -44,3 +44,23 @@ code {
   height: 75vh;
   margin-top: 0px;
 }
+
+.ui.segment.p {
+  max-width: 75vw;
+  margin: auto;
+  width: 75vw;
+}
+
+.comment-form {
+  margin: auto;
+  width: 50vw;
+}
+
+.comments {
+  margin-top: 50px;
+  margin-left: 25%;
+}
+
+.ui.image {
+  width: 100px;
+}

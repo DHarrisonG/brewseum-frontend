@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-// import React from 'react'
 import { Image } from 'semantic-ui-react'
 import ReactMapGL, { Marker, Popup } from "react-map-gl"
-// import * as parkData from "./data/bar-data.json"
 
 export default function Home(props) {
 
@@ -15,6 +13,11 @@ export default function Home(props) {
     })
     const [selectedBar, setSelectedBar] = useState(null)
 
+
+    const handleClick = () => {
+        console.log("handle click works")
+    }
+    
     return (
         <div>
             <ReactMapGL
@@ -40,7 +43,6 @@ export default function Home(props) {
                         </button>
                     </Marker>
                 ))}
-
                 {selectedBar ? (
                     <Popup
                         className="popup"
@@ -51,39 +53,14 @@ export default function Home(props) {
                         }}
                     >
                         <div>
-                            <a href={`http://localhost:3001/bar/${selectedBar.id}`}><h2>{selectedBar.name}</h2></a>
+                            <h2><a href='#' onClick={handleClick}>{selectedBar.name}</a></h2>
                             <p>Est: {selectedBar.opened}</p>
                             <img className="pop-img" src={selectedBar.image} />
                         </div>
                     </Popup>
                 ) : null}
+
             </ReactMapGL>
         </div>
     )
 }
-
-// class Home extends React.Component {
-//     constructor() {
-//         super()
-
-//         this.state = {
-
-//         }
-//     }
-
-//     render() {
-//         return (
-//             <div>
-//                 <h1>Homepage</h1>
-//                 <ReactMapGL
-//                     {...viewport}
-//                     mapboxApiAccessToken={"pk.eyJ1IjoiZ2ltbWlldXJhcGlzIiwiYSI6ImNrOWtneGs3dzAxMDkza3BteHNkODVub3UifQ.fw_-jP8bLXc2AVEw8KqAsg"}
-//                     onViewportChange={(viewport) => { setViewport(viewport) }}
-//                     mapStyle={"mapbox://styles/gimmieurapis/ck98mgfwf01ll1instq3ufgsq"}
-//                 >
-//                     markers here
-//                 </ReactMapGL>
-//             </div>
-//         )
-//     }
-// }
