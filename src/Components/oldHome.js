@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import MapGL, { Marker, Popup } from '@urbica/react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import { Image } from 'semantic-ui-react'
+import ReactMapGL, { Marker, Popup } from "react-map-gl"
 
 export default function Home(props) {
 
@@ -11,20 +11,20 @@ export default function Home(props) {
         height: `100vh`,
         zoom: 4
     })
-
     const [selectedBar, setSelectedBar] = useState(null)
 
 
+    const handleClick = () => {
+        console.log("handle click works")
+    }
+    
     return (
         <div>
-            <MapGL
-                style={{ width: '100vw', height: '100vh' }}
-                mapStyle="mapbox://styles/gimmieurapis/ck98mgfwf01ll1instq3ufgsq"
-                accessToken={"pk.eyJ1IjoiZ2ltbWlldXJhcGlzIiwiYSI6ImNrOWtneGs3dzAxMDkza3BteHNkODVub3UifQ.fw_-jP8bLXc2AVEw8KqAsg"}
-                latitude={viewport.latitude}
-                longitude={viewport.longitude}
-                zoom={viewport.zoom}
-                onViewportChange={setViewport}
+            <ReactMapGL
+                {...viewport}
+                mapboxApiAccessToken={"pk.eyJ1IjoiZ2ltbWlldXJhcGlzIiwiYSI6ImNrOWtneGs3dzAxMDkza3BteHNkODVub3UifQ.fw_-jP8bLXc2AVEw8KqAsg"}
+                onViewportChange={(viewport) => { setViewport(viewport) }}
+                mapStyle={"mapbox://styles/gimmieurapis/ck98mgfwf01ll1instq3ufgsq"}
             >
                 {props.bars.map((bar) => (
                     <Marker
@@ -53,13 +53,14 @@ export default function Home(props) {
                         }}
                     >
                         <div>
-                            <h2><a href={`http://localhost:3001/bars/${selectedBar.id}`}>{selectedBar.name}</a></h2>
+                            <h2><a href='#' onClick={handleClick}>{selectedBar.name}</a></h2>
                             <p>Est: {selectedBar.opened}</p>
                             <img className="pop-img" src={selectedBar.image} />
                         </div>
                     </Popup>
                 ) : null}
-            </MapGL>
+
+            </ReactMapGL>
         </div>
     )
 }
