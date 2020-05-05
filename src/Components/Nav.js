@@ -2,15 +2,20 @@ import React from 'react'
 import { Input, Button, Menu } from 'semantic-ui-react'
 
 class Nav extends React.Component {
-    // constructor() {
-    //     super()
-    //     this.state = {
-    //         activeItem: 'home'
-    //     }
-    // }
-    state = { activeItem: '' }
+    constructor(props) {
+        super(props)
+        this.state = {
+            activeItem: '',
+        }
+    }
+    // state = { activeItem: '' }
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+    handleClick = () => {
+        this.props.handleLogout()
+        this.context.history.push('/')
+    }
 
     render() {
         const { activeItem } = this.state
@@ -23,7 +28,7 @@ class Nav extends React.Component {
                     onClick={this.handleItemClick}
                     href='http://localhost:3001/'
                 />
-                <Menu.Item 
+                <Menu.Item
                     name='profile'
                     active={activeItem === 'profile'}
                     onClick={this.handleItemClick}
@@ -34,11 +39,10 @@ class Nav extends React.Component {
                         <Input icon='search' placeholder='Search...' />
                     </Menu.Item>
                     <Menu.Item>
-                        <Button primary href='http://localhost:3001/signup'>Sign up</Button>
-                    </Menu.Item>
-                    <Menu.Item>
-                        <Button>Log-in</Button>
-                    </Menu.Item>
+                    {this.props.loggedIn ? <Button color="blue" onClick={this.handleClick}>Log-Out</Button> : 
+                            <Button color="blue" href='http://localhost:3001/login'>Log-In</Button>
+                        }
+                        </Menu.Item>
                 </Menu.Menu>
             </Menu>
         )

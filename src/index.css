@@ -11,3 +11,65 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.marker-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.marker-btn img {
+  width: 30px;
+  height: 30px;
+}
+
+.mapboxgl-popup-content{
+  width: 370px;
+}
+
+/* .popup {
+  max-width: 300px;
+} */
+
+.pop-img {
+  max-width: 350px;
+}
+
+.ui.menu:first-child {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ui.segment.barImage{
+  width: 100%;
+  overflow: hidden;
+  margin:0; 
+  height: 500px
+
+}
+
+.barImage {
+  object-fit: cover;
+  text-align: center;
+  margin: -0px 0px 0px -0px;
+}
+
+.ui.segment.p {
+  max-width: 75vw;
+  margin: auto;
+  width: 75vw;
+}
+
+.comment-form {
+  margin: auto;
+  width: 50vw;
+}
+
+.comments {
+  margin-top: 50px;
+  margin-left: 25%;
+}
+
+.ui.image {
+  width: 100px;
+}
