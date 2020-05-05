@@ -13,7 +13,7 @@ class User extends React.Component {
             image: '',
             about: '',
             comments: [],
-            userBars: [],
+            bars: [],
             loggedIn: false
             // joined: ''
         }
@@ -26,17 +26,25 @@ class User extends React.Component {
     
     fetchUser = () => {
         const urlInput = parseInt(window.location.href.split("/").slice(-1)[0])
-        fetch(`http://localhost:3000/users/${urlInput}`)
+        fetch(`http://localhost:3000/users/${urlInput}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+          })
             .then(r => r.json())
             .then(user => {
                 console.log(user)
+                let duplicatedArray = user.bars
+                let uniqueArray = new Set(duplicatedArray)
+                console.log(uniqueArray)
                 this.setState({
                     userId: user.id,
                     username: user.username,
                     image: user.image,
                     about: user.about,
-                    comments: user.comments.reverse(),
-                    userBars: user.user_bars.reverse()
+                    comments: user.comments,
+                    bars: user.bars
                     // joined: user.created_at
     
                 })
@@ -70,9 +78,12 @@ class User extends React.Component {
                 </Grid>
                 <Divider horizontal>Badges</Divider>
                 <Grid columns={5} textAlign={"center"}>
-                        {this.state.userBars.map(userBar =>
+                        {this.state.bars.map(bar =>
                             <Grid.Column>
-                              <Badge barImage={userBar.bar.image}/>
+                              <Badge 
+                                key={bar.id} 
+                                barImage={bar.image}
+                                />
                             </Grid.Column>
                         )}
                         </Grid>
