@@ -12,6 +12,11 @@ class Nav extends React.Component {
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
+    handleClick = () => {
+        this.props.handleLogout()
+        this.context.history.push('/')
+    }
+
     render() {
         const { activeItem } = this.state
 
@@ -33,14 +38,11 @@ class Nav extends React.Component {
                     <Menu.Item>
                         <Input icon='search' placeholder='Search...' />
                     </Menu.Item>
-                    {this.props.loggedIn ? null : 
-                        <Menu.Item>
-                            <Button primary href='http://localhost:3001/signup'>Sign up</Button>
-                        </Menu.Item>
-                    }
                     <Menu.Item>
-                        <Button>Log-in</Button>
-                    </Menu.Item>
+                    {this.props.loggedIn ? <Button color="blue" onClick={this.handleClick}>Log-Out</Button> : 
+                            <Button color="blue" href='http://localhost:3001/login'>Log-In</Button>
+                        }
+                        </Menu.Item>
                 </Menu.Menu>
             </Menu>
         )

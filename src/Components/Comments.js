@@ -14,7 +14,12 @@ class Comments extends React.Component {
     }
 
     componentDidMount(){
-        fetch(`http://localhost:3000/users/1`)
+        fetch(`http://localhost:3000/users/${this.props.userId}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+          })
         .then(r => r.json())
         .then(user => {
             this.setState({

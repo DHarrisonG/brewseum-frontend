@@ -26,9 +26,15 @@ class Bar extends React.Component {
     }
 
     fetchBarInfo = () => {
-        fetch(`http://localhost:3000/bars/${this.state.barId}`)
+        fetch(`http://localhost:3000/bars/${this.state.barId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+              }
+        })
         .then(r => r.json())
         .then(bar => {
+            console.log(bar)
             this.setState({
                 name: bar.name,
                 opened: bar.opened,
@@ -47,15 +53,17 @@ class Bar extends React.Component {
     }
 
     handleClick = (e) => {
+        const loggedId = parseInt(localStorage.getItem('id'))
         fetch('http://localhost:3000/comments', {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
               },
               body: JSON.stringify({
                   comments: {
-                      user_id: 1,
+                      user_id: loggedId,
                       bar_id: this.state.barId,
                       comment: this.state.newComment
                     }
