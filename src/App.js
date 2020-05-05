@@ -60,8 +60,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav loggedIn={this.state.loggedIn} bars={this.state.bars} handleLogout={this.handleLogout}/>
         <Router>
+        <Route
+        render={props => (
+          <Nav {...props} loggedIn={this.state.loggedIn} bars={this.state.bars} handleLogout={this.handleLogout}/>
+        )}/>
           <Switch>
             <Route
               exact
@@ -73,7 +76,7 @@ class App extends Component {
               exact
               path="/signup"
               render={props => (
-                <Signup />
+                <Signup {...props}/>
               )} />
             <Route 
             exact 

@@ -104,7 +104,7 @@ class Bar extends React.Component {
                     commentId={comment.id}
                     comment={comment.comment} 
                     userId={comment.user_id}
-                    fetchBarInfo={this.fetchBarInfo}
+                    fetchComments={this.fetchBarInfo}
                     />
                 )}
                 </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Image, Card, Divider } from 'semantic-ui-react'
+import { Grid, Image, Card, Divider, Icon } from 'semantic-ui-react'
 import Comments from './Comments'
 import Badge from './Badge'
 
@@ -61,6 +61,7 @@ class User extends React.Component {
         return (
             <>
                 <Grid centered="true">
+                            <Icon class="userEditIcon" name='edit' size="big" />
                     <Grid.Column width={4}>
                         <Card>
                             <Image src={this.state.image} wrapped ui={false} />
@@ -92,9 +93,11 @@ class User extends React.Component {
                 {this.state.comments.map(comment =>
                     <Comments 
                     key={comment.id} 
+                    userId={comment.user_id}
                     commentId={comment.id}
                     barId={comment.bar_id}
-                    comment={comment.comment} 
+                    comment={comment.comment}
+                    fetchComments={this.fetchUser}
                     />
                 )}
                 </div>

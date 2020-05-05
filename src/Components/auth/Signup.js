@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, TextArea, Message } from 'semantic-ui-react'
+import { Button, Form, Grid, TextArea, Message, Header, Image, Segment } from 'semantic-ui-react'
 
 
 
@@ -17,6 +17,7 @@ class Signup extends React.Component {
     }
 
     handleChange = (e) => {
+        console.log(`${e.target.name}: ${e.target.value}`)
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -44,74 +45,82 @@ class Signup extends React.Component {
             .then(r => r.json())
             .then(response => {
                 console.log(response)
+                this.props.history.push(`/user/${response.user.id}`)
             })
-        this.setState({
-            username: "",
-            password: "",
-            password_confirmation: "",
-            image: "",
-            about: ""
-        })
+        // this.setState({
+        //     username: "",
+        //     password: "",
+        //     password_confirmation: "",
+        //     image: "",
+        //     about: ""
+        // })
+
     }
 
     render() {
         return (
-            <>
-                <h1>Sign-up Page</h1>
-                <Grid>
-                    <Grid.Row centered>
-                        <Grid.Column width={6}>
-                            <Form onSubmit={this.handleSubmit}>
-                                <Form.Field >
-                                    <Form.Input
-                                        required
-                                        label="Username"
-                                        name="username"
-                                        placeholder="Username"
-                                        onChange={this.handleChange}
-                                    />
-                                </Form.Field>
-                                <Form.Field>
-                                    <Form.Input
-                                        required
-                                        label="Password"
-                                        name="password"
-                                        placeholder="Password"
-                                        onChange={this.handleChange}
-                                    />
-                                </Form.Field>
-                                <Form.Field>
-                                    <Form.Input
-                                        required
-                                        label="Password Confirmation"
-                                        name="password_confirmation"
-                                        placeholder="Password"
-                                        onChange={this.handleChange}
-                                    />
-                                </Form.Field>
-                                <Form.Field>
-                                    <Form.Input
-                                        label="Image"
-                                        name="image"
-                                        placeholder="http://www.website.com/profilephoto"
-                                        onChange={this.handleChange}
-                                    />
-                                </Form.Field>
-                                <Form.Field>
-                                    <Form.TextArea
-                                        required
-                                        label="About"
-                                        name="about"
-                                        placeholder='Tell us more about you!'
-                                        onChange={this.handleChange}
-                                    />
-                                </Form.Field>
-                                <Form.Button content="Submit" />
-                            </Form>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-            </>
+            <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+                <Grid.Column style={{ maxWidth: 450 }}>
+                    <Header as='h2' color='teal' textAlign='center'>
+                        <Image src='/beers/beer5.svg' /> Welcome to Brewseum!
+            </Header>
+                    <Form onSubmit={this.handleSubmit} size='large'>
+                        <Segment stacked>
+                            <Form.Input
+                                fluid icon='user'
+                                iconPosition='left'
+                                placeholder='Username'
+                                name="username"
+                                onChange={this.handleChange}
+                            />
+
+                            <Form.Input
+                                fluid
+                                icon='lock'
+                                iconPosition='left'
+                                placeholder='Password'
+                                type='password'
+                                name='password'
+                                onChange={this.handleChange}
+                            />
+
+                            <Form.Input
+                                fluid
+                                icon='lock'
+                                iconPosition='left'
+                                placeholder='Confirm Password'
+                                type='password'
+                                name='password_confirmation'
+                                onChange={this.handleChange}
+                            />
+                            <Form.Input
+                                fluid
+                                icon='camera'
+                                iconPosition='left'
+                                placeholder='Profile Pic'
+                                type='url'
+                                name='image'
+                                onChange={this.handleChange}
+                            />
+                            <Form.TextArea
+                                fluid
+                                icon='beer'
+                                iconPosition='left'
+                                rows={2} placeholder='Tell us about yourself'
+                                type='text-field'
+                                name='about'
+                                onChange={this.handleChange}
+                            />
+                            <Form.Button color='blue' fluid size='large' content="Submit">
+                                Sign-up
+                            </Form.Button>
+                        </Segment>
+                    </Form>
+                    <Message>
+                        Already a member? <a href='/login'>Log-in</a>
+                    </Message>
+                </Grid.Column>
+            </Grid>
         )
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 class Login extends React.Component{
     constructor(props){
@@ -64,7 +64,7 @@ class Login extends React.Component{
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='teal' textAlign='center'>
-                <Image src='/logo.png' /> Log-in to your account
+                <Image src='/beers/beer5.svg' /> Log-in to your account
             </Header>
             <Form onSubmit={this.handleSubmit} size='large'>
                 <Segment stacked>
