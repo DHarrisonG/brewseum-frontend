@@ -7,10 +7,11 @@ class BarImage extends React.Component {
 
         return (
             <div class="ui segment barImage">
-              <img class="barImage" src={this.props.image}/>  
+              <img class="barImage" src={`/int/${this.props.image}.jpg`}/>  
             </div>
         )
     }
 }
 
 export default BarImage;
+
