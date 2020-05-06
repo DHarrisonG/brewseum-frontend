@@ -73,3 +73,8 @@ code {
 .ui.image {
   width: 100px;
 }
+
+.edit.big.icon{
+  position: absolute;
+  top: 60px; right: 20px;
+}

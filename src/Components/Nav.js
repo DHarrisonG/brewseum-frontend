@@ -14,7 +14,7 @@ class Nav extends React.Component {
 
     handleClick = () => {
         this.props.handleLogout()
-        this.context.history.push('/')
+        this.props.history.push('/')
     }
 
     render() {
