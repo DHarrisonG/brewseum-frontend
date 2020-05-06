@@ -45,7 +45,30 @@ class Signup extends React.Component {
             .then(r => r.json())
             .then(response => {
                 console.log(response)
-                this.props.history.push(`/user/${response.user.id}`)
+                console.log("---------",this.state,"---------")
+                fetch("http://localhost:3000/login", {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        'Authorization': `JWT ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({
+                        user: {
+                        username: this.state.username,
+                        password: this.state.password
+                        }
+                    })
+                })
+                    .then(r => r.json())
+                    .then(response => {
+                        console.log(response)
+                        localStorage.setItem("token", response.jwt)
+                        // let decoded = jwt.decode(response.jwt, "put your env here");
+                        localStorage.setItem("id", response.user.id)
+                        this.props.history.push(`/user/${response.user.id}`)
+                        this.props.handleLogin(true, response.user.id)
+                    })
             })
         // this.setState({
         //     username: "",

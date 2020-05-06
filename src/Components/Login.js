@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import jwt from 'jwt-simple'
 
 class Login extends React.Component{
     constructor(props){
@@ -45,8 +46,10 @@ class Login extends React.Component{
             // If you look in application controller we are requesting the header Authorization
             // Once it is recieved the token is decrypted and access to data is granted
             localStorage.setItem("token", response.jwt)
+            let decoded = jwt.decode(response.jwt, "put your env here");
+            console.log(decoded)
             localStorage.setItem("id", response.user.id)
-            console.log(response)
+            // console.log(response)
             this.setState({
                 currentUser: response.user.username, 
                 currentUserId: response.user.id,
