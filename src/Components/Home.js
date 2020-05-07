@@ -55,7 +55,7 @@ export default function Home(props) {
                         <div>
                             <h2><a href={`http://localhost:3001/bars/${selectedBar.id}`}>{selectedBar.name}</a></h2>
                             <p>Est: {selectedBar.opened}</p>
-                            <img className="pop-img" src={selectedBar.image} />
+                            <img className="pop-img" src={`/ext/${selectedBar.image}.jpg`}/>
                         </div>
                     </Popup>
                 ) : null}

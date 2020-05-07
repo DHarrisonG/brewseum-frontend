@@ -9,7 +9,10 @@ class Comments extends React.Component {
             username: '',
             image: '',
             barName: '',
-            commentId: this.props.commentId
+            commentId: this.props.commentId,
+            editStatus: false,
+            editId: '',
+            commentEdit: this.props.comment
         }
     }
 
@@ -45,7 +48,44 @@ class Comments extends React.Component {
         })
         .then(r => r.json())
         .then(r => {
-            this.props.fetchBarInfo()
+            this.props.fetchComments()
+        })
+    }
+
+    handleCommentEdit = () => {
+        this.setState({
+            editStatus: true,
+            editId: this.state.commentId
+        })
+    }
+
+    handleCommentChange = (e) => {
+        console.log(e.target.value)
+        this.setState({
+            commentEdit: e.target.value
+        })
+    }
+
+    handleCommentPatch = (e) => {
+        console.log(e.target.comment.value)
+        console.log(this.state.commentId)
+        fetch(`http://localhost:3000/comments/${this.state.commentId}`, {
+            method: "PATCH",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                'Authorization': `JWT ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({
+                    comment: e.target.comment.value
+            })
+        })
+        .then(r => r.json())
+        .then(r => {
+            this.props.fetchComments()
+        })
+        this.setState({
+            editStatus: false
         })
     }
 
@@ -59,9 +99,20 @@ class Comments extends React.Component {
                 <Comment.Metadata>
                     <div><a href={`/bars/${this.props.barId}`}>{this.state.barName}</a></div>
                 </Comment.Metadata>
-                <Comment.Text>{this.props.comment}</Comment.Text>
+                {this.state.commentId === this.state.editId && this.state.editStatus ?
+                                <Form onSubmit={this.handleCommentPatch}>
+                                <Form.TextArea value={this.state.commentEdit} onChange={this.handleCommentChange} name="comment"/>
+                                <Form.Button
+                                  content='Edit Comment'
+                                  labelPosition='right'
+                                  icon='edit'
+                                  primary
+                                />
+                              </Form> :  <Comment.Text>{this.props.comment}</Comment.Text>}
+               
                 <Comment.Actions>
-                    <Comment.Action onClick={this.handleCommentDelete}>Delete</Comment.Action>
+                    {this.props.userId === parseInt(localStorage.getItem('id')) ? <Comment.Action onClick={this.handleCommentDelete}>Delete</Comment.Action> : null}
+                    {this.props.userId === parseInt(localStorage.getItem('id')) ? <Comment.Action onClick={this.handleCommentEdit}>Edit</Comment.Action> : null}    
                 </Comment.Actions>
               </Comment.Content>
             </Comment>
@@ -70,5 +121,3 @@ class Comments extends React.Component {
     }
 }
     export default Comments;
-
-

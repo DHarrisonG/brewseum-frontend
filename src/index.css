@@ -68,8 +68,15 @@ code {
 .comments {
   margin-top: 50px;
   margin-left: 25%;
+  margin-bottom: 35px;
 }
 
 .ui.image {
   width: 100px;
+}
+
+.edit.big.icon{
+  position: absolute;
+  top: 60px; right: 20px;
+  cursor: pointer
 }

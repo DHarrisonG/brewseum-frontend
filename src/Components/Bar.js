@@ -1,7 +1,7 @@
 import React from 'react'
 import Comments from './Comments'
 import BarImage from './BarImage'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Grid, Image, Divider} from 'semantic-ui-react'
 
 
 class Bar extends React.Component {
@@ -73,21 +73,80 @@ class Bar extends React.Component {
         .then(r => {
             this.fetchBarInfo()
         })
+        this.setState({
+            newComment: ''
+        })
+    }
+
+    handleVisit = (e) => {
+        console.log("button clicked")
+        const loggedId = parseInt(localStorage.getItem('id'))
+        fetch('http://localhost:3000/user_bars', {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+              },
+              body: JSON.stringify({
+                  user_bar: {
+                      user_id: loggedId,
+                      bar_id: this.state.barId,
+                    }
+                })
+        })
+        .then(r => r.json())
+        .then(r => {
+            this.fetchBarInfo()
+        })
     }
 
     render() {
+
+        const nameStyle = {
+            fontSize: '18px',
+            fontFamily: "Tahoma, Geneva, sans-serif",
+        }
+
+        const pStyle = {
+            fontSize: '18px',
+            fontFamily: "Tahoma, Geneva, sans-serif",
+        }
+        
+        const dStyle = {
+            marginBottom: '45px'
+
+        }
+
+        const estStyle = {
+            position: "absolute",
+            right: "46%",
+            top: 605,
+            fontWeight: "bold"
+        }
+
+
         return (
             <>
-                <div>
-                    <BarImage image={this.state.image}/>
-                </div>
-                <div class="ui segment p">
-                    <p>{this.state.overview}</p>
-                </div>
-                <div class="ui comments"></div>
+                <Grid textAlign={"center"}>
+                    <Grid.Row columns={1}>
+                        <Grid.Column>
+                            <BarImage image={this.state.image}/>
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Divider horizontal><p style={nameStyle}>{this.state.name}</p></Divider>
+                    <p style={estStyle}>Est. {this.state.opened}</p>
+                    <Grid.Row columns={1}>
+                        <Grid.Column width={12}>
+                            <p style={pStyle}>{this.state.overview}</p>
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Divider horizontal style={dStyle}><Button onClick={this.handleVisit} color='teal'>VISITED</Button></Divider>
+                </Grid>
+
                 <div class="comment-form">
                 <Form>
-                  <Form.TextArea onChange={this.handleChange}/>
+                  <Form.TextArea onChange={this.handleChange} onfocus="this.value=''"/>
                   <Button
                     content='Add Comment'
                     labelPosition='left'
@@ -104,7 +163,7 @@ class Bar extends React.Component {
                     commentId={comment.id}
                     comment={comment.comment} 
                     userId={comment.user_id}
-                    fetchBarInfo={this.fetchBarInfo}
+                    fetchComments={this.fetchBarInfo}
                     />
                 )}
                 </div>

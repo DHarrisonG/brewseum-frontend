@@ -3,7 +3,7 @@ import { Grid, Image } from 'semantic-ui-react'
 
 const Badge = (props) => (
 
-      <Image src={props.barImage} circular/>
+      <Image src={`/ext/${props.barImage}.jpg`} circular/>
 )
 
 export default Badge;
