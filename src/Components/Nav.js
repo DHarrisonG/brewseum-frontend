@@ -37,9 +37,6 @@ class Nav extends React.Component {
                 /> : null }
                 <Menu.Menu position='right'>
                     <Menu.Item>
-                        <Input icon='search' placeholder='Search...' />
-                    </Menu.Item>
-                    <Menu.Item>
                     {this.props.loggedIn ? <Button color="blue" onClick={this.handleClick}>Log-Out</Button> : 
                             <Button color="blue" href='http://localhost:3001/login'>Log-In</Button>
                         }

@@ -17,7 +17,8 @@ class User extends React.Component {
             loggedIn: false,
             open: false,
             newImage: '',
-            newAbout: ''
+            newAbout: '',
+            joined: ''
             
         }
     }
@@ -50,8 +51,7 @@ class User extends React.Component {
                     image: user.image,
                     about: user.about,
                     comments: user.comments,
-                    bars: user.bars
-                    // joined: user.created_at
+                    bars: user.bars,
 
                 })
             })
@@ -120,7 +120,7 @@ class User extends React.Component {
                             <Card.Content>
                                 <Card.Header>{this.state.username}</Card.Header>
                                 <Card.Meta>
-                                    <span className='date'>Joined: {this.state.joined}</span>
+                                    <span className='date'>Joined: 2020</span>
                                 </Card.Meta>
                             </Card.Content>
                         </Card>
