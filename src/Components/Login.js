@@ -42,12 +42,13 @@ class Login extends React.Component{
         })
         .then(r => r.json())
         .then(response => {
+            console.log(response)
             // The token below will be used as a header for Authorization in your fetches
             // If you look in application controller we are requesting the header Authorization
             // Once it is recieved the token is decrypted and access to data is granted
             localStorage.setItem("token", response.jwt)
-            let decoded = jwt.decode(response.jwt, "put your env here");
-            console.log(decoded)
+            // let decoded = jwt.decode(response.jwt, "put your env here");
+            // console.log(decoded)
             localStorage.setItem("id", response.user.id)
             // console.log(response)
             this.setState({
